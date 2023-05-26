@@ -1,1 +1,15 @@
-FROM node:14WORKDIR /usr/src/app# Скопируйте package.json и package-lock.json (или yarn.lock) в контейнерCOPY package*.json ./# Установите зависимостиRUN npm install# Скопируйте остальные файлы проекта в контейнерCOPY . .# Укажите порт, на котором будет работать сервер Node.jsEXPOSE 3001# Выполните сборку проекта (если необходимо)RUN npm run buildCMD [ "node", "server.js" ]
+FROM node:13
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+# Установите зависимости
+RUN npm install
+
+COPY . .
+
+EXPOSE 3001
+
+
+CMD [ "node", "server.js" ]
